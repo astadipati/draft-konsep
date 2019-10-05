@@ -16,7 +16,7 @@
   else  
   {  
     //insert post  
-    $sql = "INSERT INTO tbl_post(post_title, post_description, email, post_status) VALUES ('".$post_title."', '".$post_description."','".$post_email."', 'y')";  
+    $sql = "INSERT INTO tbl_post(post_title, post_description, email, post_status) VALUES ('".$post_title."', '".$post_description."','".$post_email."', '1')";  
     mysqli_query($connect, $sql);  
     echo mysqli_insert_id($connect);  
   }
