@@ -17,14 +17,19 @@
               <?php 
               $val1 = "Eko";
               $val2 = "Enak mungkin";
+              $val3 = "Enak@gmail.com";
               ?>
               <div class="form-group">  
                    <label>Enter Post Title</label>  
-                   <input type="text" value="<?echo $val1?>" name="post_title" id="post_title" class="form-control" />  
+                   <input type="text" value="<?php echo $val1?>" name="post_title" id="post_title" class="form-control" />  
               </div>  
               <div class="form-group">  
                    <label>Enter Post Description</label>  
-                   <input value="<?php echo $val2?>" name="post_description" id="post_description" rows="6" class="form-control" />  
+                   <input type="text" value="<?php echo $val2?>" name="post_description" id="post_description" class="form-control" />  
+              </div>
+              <div class="form-group">  
+                   <label>Email</label>  
+                   <input type="text" value="<?php echo $val3?>" name="email" id="email" class="form-control" />  
               </div>
   <div class="form-group">
    <button type="button" name="publish" class="btn btn-info">Publish</button>
@@ -42,13 +47,14 @@ $(document).ready(function(){
     {  
          var post_title = $('#post_title').val();  
          var post_description = $('#post_description').val();  
+         var post_email = $('#email').val();  
          var post_id = $('#post_id').val();  
-         if(post_title != '' && post_description != '')  
+         if(post_title != '' && post_description != '' && post_email != '')  
          {  
               $.ajax({  
                    url:"save_post.php",  
                    method:"POST",  
-                   data:{postTitle:post_title, postDescription:post_description, postId:post_id},  
+                   data:{postTitle:post_title, postDescription:post_description, postEmail:post_email, postId:post_id},  
                    dataType:"text",  
                    success:function(data)  
                    {  
@@ -71,8 +77,8 @@ $(document).ready(function(){
 </script>
 
 <?php 
-// $page = $_SERVER['PHP_SELF'];
-//  $sec = "60";
-//  header("Refresh: $sec; url=$page");
-//  echo "Watch the page reload itself in 60 second!";
+$page = $_SERVER['PHP_SELF'];
+ $sec = "60";
+ header("Refresh: $sec; url=$page");
+ echo "Watch the page reload itself in 60 second!";
 ?>
