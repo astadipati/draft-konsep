@@ -1,3 +1,12 @@
+<?php
+// Create database connection using config file
+include_once("config.php");
+
+// Fetch all users data from database
+$result = mysqli_query($mysqli, "select a.post_title , a.post_description, a.email, a.post_status,b.post_status from tbl_post a
+left join tbl_antri b on a.post_title = b.post_title
+where b.post_status is null limit 1");
+?>
 
 <html>  
     <head>  
@@ -13,24 +22,29 @@
               <br />  
               <h2 align="center">Testing auto</h2>  
               <br />  
-
               <?php 
-              $val1 = "Eko";
-              $val2 = "Enak mungkin";
-              $val3 = "Enak@gmail.com";
+              while($data = mysqli_fetch_array($result)) {   
+          //     $val1 = "Eko";
+          //     $val2 = "Enak mungkin";
+          //     $val3 = "Enak@gmail.com";
+               // echo $data['post_title'];
+               // die();
               ?>
               <div class="form-group">  
                    <label>Enter Post Title</label>  
-                   <input type="text" value="<?php echo $val1?>" name="post_title" id="post_title" class="form-control" />  
+                   <input type="text" value="<?php echo $data['post_title']?>" name="post_title" id="post_title" class="form-control" />  
               </div>  
               <div class="form-group">  
                    <label>Enter Post Description</label>  
-                   <input type="text" value="<?php echo $val2?>" name="post_description" id="post_description" class="form-control" />  
+                   <input type="text" value="<?php echo $data['post_description']?>" name="post_description" id="post_description" class="form-control" />  
               </div>
               <div class="form-group">  
                    <label>Email</label>  
-                   <input type="text" value="<?php echo $val3?>" name="email" id="email" class="form-control" />  
+                   <input type="text" value="<?php echo $data['email']?>" name="email" id="email" class="form-control" />  
               </div>
+              <?php 
+              }
+              ?>
   <div class="form-group">
    <button type="button" name="publish" class="btn btn-info">Publish</button>
   </div>
@@ -43,7 +57,7 @@
 </html>  
 <script>  
 $(document).ready(function(){  
-    function autoSave()  
+    function autoSave() 
     {  
          var post_title = $('#post_title').val();  
          var post_description = $('#post_description').val();  
